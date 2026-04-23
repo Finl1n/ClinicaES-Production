@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:clinica}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:123}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 10
+  jpa:
+    show-sql: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  application:
+    name: clinica-medica
+
+security:
+  token:
+    secret: ${TOKEN_SECRET:clinica-ucsal-secret-key-2025}
+    expiration: 7200000
+
+server:
+  port: ${PORT:8000}
+
+settings:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:4200}
+  security:
+    user: ${ADMIN_USER:admin}
+    password: ${ADMIN_PASSWORD:admin123}
+    # CORRIGIDO: propriedades do profissional padrão que SystemStart lê
+    profissional:
+      user: ${PROFISSIONAL_USER:profissional}
+      password: ${PROFISSIONAL_PASSWORD:profissional123}

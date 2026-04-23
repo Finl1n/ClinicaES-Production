@@ -1,0 +1,263 @@
+{
+	"info": {
+		"name": "Clinica Medica API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();",
+									"if (response.token) {",
+									"    pm.collectionVariables.set(\"jwt_token\", response.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/sign-in",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"sign-in"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Escolas",
+			"item": [
+				{
+					"name": "Cadastrar Escola",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Escola de Medicina Principal\",\n    \"ies\": \"UCSAL\",\n    \"coordenador\": \"Dr. Roberto Carlos\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/escolas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"escolas"
+							]
+						}
+					}
+				},
+				{
+					"name": "Listar Escolas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/escolas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"escolas"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Profissionais",
+			"item": [
+				{
+					"name": "Cadastrar Profissional (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Dra. Jane Doe\",\n    \"username\": \"jane.doe\",\n    \"password\": \"senha123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profissionais",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profissionais"
+							]
+						}
+					}
+				},
+				{
+					"name": "Completar Cadastro (Profissional)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"especialidade\": \"Cardiologia\",\n    \"conselho\": \"CRM\",\n    \"numeroRegistro\": \"998877-BA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profissionais/meu-perfil/complemento",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profissionais",
+								"meu-perfil",
+								"complemento"
+							]
+						}
+					}
+				},
+				{
+					"name": "Consultar Meu Perfil",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/profissionais/meu-perfil",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profissionais",
+								"meu-perfil"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Unidades",
+			"item": [
+				{
+					"name": "Cadastrar Unidade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Unidade Norte\",\n    \"ies\": \"UCSAL\",\n    \"responsavel\": \"Ricardo Souza\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/unidades",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"unidades"
+							]
+						}
+					}
+				},
+				{
+					"name": "Inativar Unidade",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/unidades/1/inativar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"unidades",
+								"1",
+								"inativar"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "jwt_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

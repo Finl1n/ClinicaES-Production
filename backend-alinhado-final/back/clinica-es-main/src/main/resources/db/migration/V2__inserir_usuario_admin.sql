@@ -1,0 +1,6 @@
+-- INSERT INTO usuario (username, password, role)
+-- VALUES (
+--     'admin',
+--     '$2a$12$6/YVp.3U7vDqZz0P9KxGVeI6mO.7v9X.7l8i5.6fR2z8m8Y.9PzK.', 
+--     'ADMINISTRADOR'
+-- );

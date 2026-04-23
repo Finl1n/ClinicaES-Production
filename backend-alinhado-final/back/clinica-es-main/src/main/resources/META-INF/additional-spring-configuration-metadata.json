@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "security.tokens.security-token",
+    "type": "java.lang.String",
+    "description": "A description for 'security.tokens.security-token'"
+  },
+  {
+    "name": "security.tokens.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'security.tokens.expiration'"
+  },
+  {
+    "name": "security.tokens.refresh-token",
+    "type": "java.lang.String",
+    "description": "A description for 'security.tokens.refresh-token'"
+  },
+  {
+    "name": "settings.cors.allowed-origins",
+    "type": "java.lang.String",
+    "description": "A description for 'settings.cors.allowed-origins'"
+  },
+  {
+    "name": "settings.cors.max-age",
+    "type": "java.lang.String",
+    "description": "A description for 'settings.cors.max-age'"
+  },
+  {
+    "name": "security.token.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'security.token.secret'"
+  },
+  {
+    "name": "security.token.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'security.token.expiration'"
+  }
+]}
