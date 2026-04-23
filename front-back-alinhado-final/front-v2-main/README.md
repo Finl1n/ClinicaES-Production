@@ -1,162 +1,298 @@
-🏥 ClinicalES - Sistema de Controle de Clínica Médica
+# ClinicalES - Frontend
 
-Sistema completo para gerenciamento de uma clínica médica acadêmica (IES), permitindo o controle de pacientes, profissionais de saúde, atendimentos, prontuários e medicações, com integração total entre frontend, backend e banco de dados.
+Sistema web desenvolvido em **Angular 17** para o controle de uma clinica medica voltada ao ambiente academico/IES.
 
-🚀 Tecnologias Utilizadas
-🔹 Frontend
-Angular
-TypeScript
-HTML5 + SCSS
-Reactive Forms
-Componentes Standalone
-🔹 Backend
-Java 17+
-Spring Boot
-Spring Data JPA
-Hibernate
-🔹 Banco de Dados
-PostgreSQL
-📦 Funcionalidades
-👤 Usuários
-Cadastro de administradores e profissionais de saúde
-Controle de acesso por perfil
-Completar cadastro do profissional
-🏫 Estrutura Organizacional
-Cadastro de escolas
-Cadastro de unidades
-Associação com IES
-🧑‍⚕️ Pacientes
-Cadastro de pacientes
-Edição de informações
-Inativação de pacientes
-Filtro por categoria
-💊 Medicações
-Cadastro de medicações
-Controle de estoque
-Controle de validade
-Atualização de quantidade via edição
-Ativação/Inativação
-Indicadores visuais:
-⚠️ Estoque baixo
-❌ Sem estoque
-🔴 Vencida
-🩺 Atendimentos
-Criação de atendimentos
-Registro de:
-Sintomas
-Diagnóstico
-Tratamento
-Associação de medicação ao paciente
-Baixa automática de estoque
-Registro do uso de medicação no banco
-📋 Prontuário
-Histórico completo do paciente
-Exibição de:
-Atendimentos
-Diagnósticos
-Tratamentos
-Medicações utilizadas
-Integração direta com o banco de dados
-📊 Relatórios
-Medicações vencidas
-Medicações com estoque baixo
-Profissionais com cadastro incompleto
-Requisições de medicação
-🔗 Integração Front + Back
+Este projeto representa a camada de interface do sistema e se comunica com uma API REST externa para autenticar usuarios e gerenciar:
 
-O sistema segue arquitetura desacoplada:
+- escolas
+- unidades
+- profissionais de saude
+- pacientes
+- medicamentos
+- atendimentos
+- prontuarios
+- requisicoes
+- dashboards e relatorios
 
-Frontend consome API REST
-Backend fornece endpoints estruturados
-Comunicação via JSON (HTTP)
-⚙️ Como Rodar o Projeto
-🔹 Backend (Spring Boot)
-cd back
-mvn clean install
-mvn spring-boot:run
+O objetivo e oferecer uma interface organizada, responsiva e pronta para uso com um backend real.
 
-Servidor rodando em:
+## Visao Geral
 
-http://localhost:8080
-🔹 Frontend (Angular)
-cd front
+O frontend foi construido com uma arquitetura baseada em:
+
+- **Angular standalone**
+- **Lazy loading por rota**
+- **Servicos centralizados para API**
+- **Guards de autenticacao e permissao**
+- **Interceptor HTTP para envio do token**
+- **Modelos tipados em TypeScript**
+
+A aplicacao separa bem as areas de acesso:
+
+- **Administrador**
+  - dashboard
+  - escolas
+  - unidades
+  - profissionais
+  - medicamentos
+  - relatorios
+
+- **Profissional de saude**
+  - meu cadastro
+  - pacientes
+  - atendimentos
+  - prontuarios
+  - requisicoes
+
+## Tecnologias
+
+- Angular 17
+- TypeScript
+- SCSS
+- RxJS
+- Angular Router
+- Angular HttpClient
+- JWT para autenticacao
+
+## Funcionalidades
+
+### Autenticacao
+
+- login com `username` e `password`
+- armazenamento do token no `localStorage`
+- restauracao de sessao ao recarregar a pagina
+- controle de acesso por perfil
+
+### Area do Administrador
+
+- cadastro, edicao e inativacao de escolas
+- cadastro, edicao e inativacao de unidades
+- cadastro e inativacao de profissionais
+- cadastro, edicao e ativacao/inativacao de medicamentos
+- visualizacao de indicadores e relatorios
+
+### Area do Profissional
+
+- atualizacao do proprio cadastro
+- listagem e cadastro de pacientes
+- cadastro e edicao de atendimentos
+- consulta de prontuarios
+- emissao de requisicoes de medicamentos
+
+### Integração com a API
+
+O frontend consome a API atraves de `environment.apiUrl`.
+
+Configuracao atual:
+
+- `src/environments/environment.ts`
+- `src/environments/environment.prod.ts`
+
+URL padrao:
+
+```ts
+apiUrl: "http://localhost:8000";
+```
+
+## Rotas da Aplicacao
+
+### Publica
+
+- `/login`
+
+### Admin
+
+- `/admin/dashboard`
+- `/admin/escolas`
+- `/admin/unidades`
+- `/admin/profissionais`
+- `/admin/medicacoes`
+- `/admin/relatorios`
+
+### Profissional
+
+- `/profissional/meu-cadastro`
+- `/profissional/pacientes`
+- `/profissional/atendimentos`
+- `/profissional/prontuarios`
+- `/profissional/requisicoes`
+
+## Requisitos
+
+- Node.js 18+ recomendado
+- npm
+- Angular CLI 17
+- backend da aplicacao rodando em `http://localhost:8000`
+
+## Como Rodar
+
+### 1. Instale as dependencias
+
+```bash
 npm install
+```
+
+### 2. Inicie o ambiente de desenvolvimento
+
+```bash
+npm start
+```
+
+ou
+
+```bash
 ng serve
+```
 
-Acesse:
+### 3. Acesse no navegador
 
+```bash
 http://localhost:4200
-🗄️ Configuração do Banco de Dados
-🔹 PostgreSQL
+```
 
-Crie o banco:
+## Build de Producao
 
-CREATE DATABASE clinica;
-🔹 application.properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/clinica
-spring.datasource.username=postgres
-spring.datasource.password=senha
+Para gerar a versao final:
 
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-📁 Estrutura do Projeto
-📦 clinicales
-┣ 📂 front
-┃ ┣ 📂 src
-┃ ┃ ┣ 📂 app
-┃ ┃ ┃ ┣ 📂 components
-┃ ┃ ┃ ┣ 📂 services
-┃ ┃ ┃ ┗ 📂 models
-┃ ┗ 📂 assets
-┣ 📂 back
-┃ ┣ 📂 controller
-┃ ┣ 📂 service
-┃ ┣ 📂 repository
-┃ ┣ 📂 model
-┃ ┗ 📂 dto
-🔥 Principais Regras de Negócio
-Medicação não pode ser duplicada por nome
-Estoque é controlado via edição
-Uso de medicação reduz automaticamente o estoque
-Prontuário exibe histórico completo do paciente
-Profissionais precisam completar cadastro
-Unidades não podem ser excluídas (apenas inativadas)
-🎯 Objetivo do Projeto
+```bash
+npm run build
+```
 
-Projeto desenvolvido com foco acadêmico e profissional, simulando um sistema real de clínica médica com:
+O resultado sera gerado em:
 
-Arquitetura moderna (Front + Back + DB)
-Regras de negócio reais
-Integração completa
-Interface responsiva e funcional
-👨‍💻 Autor
+```bash
+dist/clinica-angular
+```
 
-Gustavo Martins dos Santos
+## Estrutura do Projeto
 
-💼 Desenvolvedor Full Stack
-📍 Salvador - BA
-🔗 GitHub: https://github.com/Finl1n
-🔗 LinkedIn: https://www.linkedin.com/in/gustavo-martins-872373155/
-⭐ Diferenciais
-Sistema completo funcional
-Integração real entre módulos
-Controle automático de estoque
-Prontuário dinâmico
-Interface moderna
-Código organizado em camadas
-📌 Status do Projeto
+```text
+src/
+  app/
+    core/
+      guards/
+      interceptors/
+      models/
+      services/
+    features/
+      auth/
+      admin/
+      profissional/
+    shared/
+      components/
+  assets/
+    styles/
+  environments/
+```
 
-✔️ Sistema funcional
-✔️ Integração completa
-✔️ Pronto para portfólio
-✔️ Pronto para apresentação
+### Pastas principais
 
-📷 Demonstração
+- `src/app/core`
+  - autenticação
+  - interceptor
+  - models
+  - servicos centrais
 
-Adicione prints aqui:
+- `src/app/features`
+  - telas da aplicação separadas por dominio
 
-Tela de medicações
-Prontuário
-Dashboard
-Atendimentos
+- `src/app/shared`
+  - componentes reutilizaveis de layout e UI
+
+- `src/assets/styles`
+  - estilos globais e utilitarios visuais
+
+## Fluxo de Autenticacao
+
+1. O usuario acessa a tela de login.
+2. O front envia `username` e `password` para `POST /auth/login`.
+3. A API retorna um JWT.
+4. O token e o usuario sao salvos no `localStorage`.
+5. O interceptor adiciona o token nas requisicoes protegidas.
+6. Os guards liberam ou bloqueiam o acesso conforme o perfil.
+
+## Modelagem de Dados no Front
+
+Os principais tipos utilizados estao em `src/app/core/models/models.ts`.
+
+Alguns exemplos:
+
+- `Usuario`
+- `Escola`
+- `Unidade`
+- `Paciente`
+- `ProfissionalSaude`
+- `Medicacao`
+- `Atendimento`
+- `Prontuario`
+- `Requisicao`
+- `StatusDashboard`
+
+## Servicos Principais
+
+O acesso a API esta centralizado em:
+
+- `src/app/core/services/api.service.ts`
+- `src/app/core/services/auth.service.ts`
+
+Esses servicos cuidam de:
+
+- login e logout
+- recuperacao de sessao
+- chamadas HTTP para os modulos do sistema
+- adaptacao de dados vindos do backend
+
+## Observacoes Tecnicas
+
+- O projeto utiliza componentes **standalone**.
+- As rotas carregam as telas de forma preguiçosa quando necessario.
+- O token de autenticacao e armazenado no navegador.
+- O front depende da API estar online para login e operacoes de CRUD.
+
+## Principais Dependencias
+
+```json
+{
+  "@angular/animations": "^17.3.0",
+  "@angular/common": "^17.3.0",
+  "@angular/compiler": "^17.3.0",
+  "@angular/core": "^17.3.0",
+  "@angular/forms": "^17.3.0",
+  "@angular/platform-browser": "^17.3.0",
+  "@angular/platform-browser-dynamic": "^17.3.0",
+  "@angular/router": "^17.3.0",
+  "rxjs": "~7.8.0",
+  "zone.js": "~0.14.3"
+}
+```
+
+## Scripts Disponiveis
+
+```bash
+npm start
+npm run build
+npm run watch
+```
+
+- `npm start`: sobe o servidor local
+- `npm run build`: gera o build de producao
+- `npm run watch`: recompila automaticamente durante desenvolvimento
+
+## Autor
+
+**Gustavo Martins dos Santos**
+
+- Desenvolvedor Full Stack
+- Salvador - BA
+- GitHub: https://github.com/Finl1n
+- LinkedIn: https://www.linkedin.com/in/gustavo-martins-872373155/
+
+## Proposito do Projeto
+
+Este frontend foi criado com foco academico e profissional, demonstrando:
+
+- organizacao por modulos
+- integracao com backend real
+- controle de acesso por perfil
+- formulários e CRUDs estruturados
+- experiencia de uso limpa e funcional
